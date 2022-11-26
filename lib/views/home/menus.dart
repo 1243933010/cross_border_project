@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-import './controller.dart';
-import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:cross_border_project/controller/main.dart';
+import './menu_fnc.dart';
 
 class MenusClass extends StatelessWidget {
   final imgList;
   MenusClass({super.key, required this.imgList});
-
-  final Controller c = Get.put(Controller());
-
+  @override
+  changeIcon(int index){
+    // print(menusMap['${imgList[index]['info'][1]['value']}']);
+    // if(imgList[index]['info'][1]['value'])
+     menusMap['${imgList[index]['info'][1]['value']}']();
+    // final globalStateController = Get.put(GlobalStateController());
+    // globalStateController.changeBottomBarIndex(1);
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,8 +28,9 @@ class MenusClass extends StatelessWidget {
             children: [
               for(int i=0;i<(imgList?.length??0);i++)
                 GestureDetector(
-                  onTap: ()=>{
-                    print('${imgList[i]['info'][1]['value']}')
+                  onTap: (){
+                    changeIcon(i);
+                    // print('${imgList[i]['info'][1]['value']}');
                   },
                   child: Column(
                     children: [

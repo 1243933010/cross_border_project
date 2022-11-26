@@ -19,7 +19,7 @@ class _ShopListClassState extends State<ShopListClass>{
   getCartList(){
     request('productHot', 'get', {'page':'1','limit':'10'}).then((value){
       var data = jsonDecode(value.toString());
-      print(data);
+      // print(data);
       if(data['status']==200){
         setState(() {
           recommendShopList = data['data'];
@@ -68,7 +68,7 @@ class _ShopListClassState extends State<ShopListClass>{
            child: ListView(
              shrinkWrap: true,
              children: [
-               // CartListClass(shopList:widget.shopList),
+               CartListClass(shopList:widget.shopList),
                RecommendShopClass(shopList:widget.shopList,recommendShopList:recommendShopList),
              ],
            ),
@@ -100,13 +100,12 @@ class RecommendShopClass extends StatelessWidget{
   RecommendShopClass({super.key,required this.shopList,required this.recommendShopList});
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
         // height: 1000.h,
-        color: Colors.red,
+        // color: Colors.red,
         child: shopList.isEmpty?
        Column(
-         mainAxisAlignment: MainAxisAlignment.center,
          children: [
            Row(
              mainAxisAlignment: MainAxisAlignment.center,
@@ -116,21 +115,28 @@ class RecommendShopClass extends StatelessWidget{
                Text('--------'),
              ],
            ),
-            GridView(
-             shrinkWrap: true,
-             // physics: const NeverScrollableScrollPhysics(),
-             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-               crossAxisCount: 2,
-               childAspectRatio: 1,
+           Padding(
+             padding: const EdgeInsets.only(left: 30,right: 30),
+             child: GridView(
+               shrinkWrap: true,
+               physics: const NeverScrollableScrollPhysics(),
+               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                 crossAxisCount: 2,
+                 childAspectRatio: 1,
+                 mainAxisSpacing:30,
+                 crossAxisSpacing: 2
+               ),
+               children: recommendShopList.map<Widget>((val){
+                 return  Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                    ClipRRect(borderRadius: BorderRadius.circular(40),child:  Image.network('${val['image']}',width: 250.w,height: 250.w,),),
+                     Text('${val['store_name']}',overflow: TextOverflow.ellipsis,),
+                     Text('${val['price']}',textAlign: TextAlign.left,)
+                   ],
+                 );
+               }).toList(),
              ),
-             children: recommendShopList.map<Widget>((val){
-               return Column(
-                 children: [
-                   Image.network('${val['image']}',width: 200.w,height: 200.w,),
-                   Text('${val['store_name']}')
-                 ],
-               );
-             }).toList(),
            )
          ],
        ):const Text(''),

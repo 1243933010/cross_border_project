@@ -28,7 +28,13 @@ class _BottomNvClassState extends State<BottomNvClass>{
       index=ind;
     });
   }
-
+@override
+  void initState() {
+    super.initState();
+    mainState.bottombar_index.listen((p0) {
+      setState(() { index=p0;});
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

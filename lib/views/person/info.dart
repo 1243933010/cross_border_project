@@ -35,8 +35,8 @@ class _InfoClassState extends State<InfoClass>{
        userInfo = json.decode(userInfoStr);
        loginStatus = loginBool;
      });
-     print(loginBool);
-     print(userInfoStr);
+     // print(loginBool);
+     // print(userInfoStr);
      // print(userInfo['avatar']);
    }
 
