@@ -6,20 +6,25 @@ import 'package:get/get.dart';
 import 'package:cross_border_project/controller/main.dart';
 
 Future request(url,method,formData)async{
+
   final globalStateController = Get.put(GlobalStateController());
   var mainState = Get.find<GlobalStateController>().state;
   try{
+
     BaseOptions options = BaseOptions();
     options.headers['Authori-zation']=mainState.token;
     var response;
     Dio dio = new Dio(options);
 
     if(method=='post'){
+
       response = await dio.post(servicePath[url]!,data:formData!=null?formData:{});
     }else{
+      print('222111${dio.get}${servicePath[url]}');
       response = await dio.get(servicePath[url]!,queryParameters:formData!=null?formData:{});
     }
     print(servicePath[url]);
+
     // print(dio.options.headers);
     if(response.statusCode == 200){
       return response;
