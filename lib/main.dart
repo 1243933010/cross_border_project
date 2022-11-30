@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
 
 void testChangeToken()async{
   final globalStateController = Get.put(GlobalStateController());
-  var token = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwd2QiOiJkNDFkOGNkOThmMDBiMjA0ZTk4MDA5OThlY2Y4NDI3ZSIsImlzcyI6InNpdC56eWpzbC5jb20iLCJhdWQiOiJzaXQuenlqc2wuY29tIiwiaWF0IjoxNjY5Mjg0NjQ4LCJuYmYiOjE2NjkyODQ2NDgsImV4cCI6MTY3MTg3NjY0OCwianRpIjp7ImlkIjo3LCJ0eXBlIjoicm91dGluZSJ9fQ.qarvtxQG_I27dS4NleH_dHfAzL1iTJuxxnmnTWS0FdQ';
+  var token = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwd2QiOiJkNDFkOGNkOThmMDBiMjA0ZTk4MDA5OThlY2Y4NDI3ZSIsImlzcyI6InNpdC56eWpzbC5jb20iLCJhdWQiOiJzaXQuenlqc2wuY29tIiwiaWF0IjoxNjY5NDQ1MjkwLCJuYmYiOjE2Njk0NDUyOTAsImV4cCI6MTY3MjAzNzI5MCwianRpIjp7ImlkIjo3LCJ0eXBlIjoicm91dGluZSJ9fQ.RAFF-q261C4-9OR6Sx7ipdgcLG2-CW4v0CVGHi6cg3Q';
   globalStateController.changeToken(token);
   final prefs = await SharedPreferences.getInstance();
   await prefs.setString('token', token);

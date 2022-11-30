@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import './shop-list.dart';
-
+// import 'package:cross_border_project/common/network/index.dart';
 
 class ShoppingCartPageClass extends StatefulWidget {
   ShoppingCartPageClass({super.key});
@@ -10,15 +12,16 @@ class ShoppingCartPageClass extends StatefulWidget {
 }
 
 class _ShoppingCartPageClassState extends State<ShoppingCartPageClass> {
- var shopList = [];
 @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: const Text(
             '购物车',
@@ -31,12 +34,14 @@ class _ShoppingCartPageClassState extends State<ShoppingCartPageClass> {
           height: double.infinity,
           width: double.infinity,
           color: const Color.fromRGBO(245, 245, 245, 1),
-          child: Column(
-            children: [
-              LabelTextClass(),
-              ShopListClass(shopList:shopList),
-            ],
-          ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                LabelTextClass(),
+                ShopListClass(),
+              ],
+            ),
+          )
         ));
   }
 }

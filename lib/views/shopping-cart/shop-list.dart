@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cross_border_project/common/network/index.dart';
+import './selectShop.dart';
 
 class ShopListClass extends StatefulWidget {
-  var shopList = [];
-  ShopListClass({super.key,required this.shopList});
-
+  ShopListClass({super.key});
+  @override
   _ShopListClassState createState()=>_ShopListClassState();
 
 
@@ -15,7 +15,25 @@ class ShopListClass extends StatefulWidget {
 
 class _ShopListClassState extends State<ShopListClass>{
    List recommendShopList = [];
+   var shopList = [];   //当前购物车信息
+   var shopConut = 0;   //购物车商品总数量
+   var btnClickStatus = false;   //底部是否切换成删除按钮
+   var allCheckStatus = true;
+
   @override
+
+  getShopNum(){
+    request('cartCount', 'get', {'numType':'0'}).then((val){
+      var data = jsonDecode(val.toString());
+      if(data['status']==200){
+        setState(() {
+          shopConut = data['data']['count'];
+        });
+
+      }
+    });
+  }
+
   getCartList(){
     request('productHot', 'get', {'page':'1','limit':'10'}).then((value){
       var data = jsonDecode(value.toString());
@@ -28,12 +46,57 @@ class _ShopListClassState extends State<ShopListClass>{
 
     });
   }
+
+
+  getUserCartList(){  //获取当前用户购物车信息
+    request('cartList', 'get', {'page':'1','limit':'20','status':'1'}).then((res){
+      var data = jsonDecode(res.toString());
+      if(data['status']==200){
+        if(data['data']['valid']!=null){
+          for(var i = 0;i< data['data']['valid'].length;i++){
+            data['data']['valid'][i]['checkBool'] = true;
+          }
+          setState(() {
+            shopList = data['data']['valid'];
+          });
+        }
+      }
+    });
+  }
+   checkAll(status){
+    // print(status);
+    var arr = shopList;
+    for(var i = 0;i<arr.length;i++){
+      arr[i]['checkBool'] = status;
+    }
+    setState(() {
+      shopList=arr;
+      allCheckStatus = status;
+    });
+   }
+   changeItem(status,index){
+     var arr = shopList;
+     arr[index]['checkBool'] = status;
+     var bool = true;
+     for(var i = 0;i<arr.length;i++){
+       if(arr[i]['checkBool']==false){
+         bool = false;
+       }
+     }
+     setState(() {
+       shopList=arr;
+       allCheckStatus = bool;
+     });
+   }
+
+
   @override
   void initState() {
     super.initState();
     getCartList();
+    getUserCartList();
+    getShopNum();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -48,28 +111,42 @@ class _ShopListClassState extends State<ShopListClass>{
               Row(
                 children: [
                   const Text('购物数量',style: TextStyle(fontSize: 17),),
-                  Padding(padding:const EdgeInsets.only(left: 5),child: Text('${widget.shopList.length}',style: const TextStyle(fontSize: 19),),)
+                  Padding(padding:const EdgeInsets.only(left: 5),child: Text('${shopConut??0}',style: const TextStyle(fontSize: 19),),)
                 ],
               ),
-              widget.shopList.isNotEmpty?OutlinedButton(
-                  style:  const ButtonStyle(
-                    // textStyle: MaterialStatePropertyAll(),
-                    // backgroundColor: MaterialStateProperty.all(Colors.red)
+              shopConut>0?OutlinedButton(
+                  style:   OutlinedButton.styleFrom(
+                    side: const BorderSide(color: Colors.grey),
                   ),
-                  onPressed: (){},
-                  child: const Text('管理')
+                  onPressed: (){
+                    setState(() {
+                      btnClickStatus = !btnClickStatus;
+                    });
+                  },
+                  child:!btnClickStatus? const Text('管理',style: TextStyle(color: Colors.grey),):const Text('取消',style: TextStyle(color: Colors.grey),)
               ):const Text('')
             ],
           ),),
           Container(width: double.infinity,height: 12.h,color: Colors.grey[200],),
          Container(
            // color: Colors.yellow,
-           height: 850.h,
-           child: ListView(
-             shrinkWrap: true,
+           height: 810.h,
+           child: Column(
+             // shrinkWrap: true,
              children: [
-               CartListClass(shopList:widget.shopList),
-               RecommendShopClass(shopList:widget.shopList,recommendShopList:recommendShopList),
+               shopConut>0?Container(
+                 // color: Colors.red,
+                width: 750.w,
+                height: 810.h,
+                child: Stack(
+                  // alignment: Alignment.center,
+                  children:  [
+                    CartListClass(shopConut:shopConut,shopList:shopList,changeItemFnc:changeItem,updateShop:getUserCartList),
+                    RecommendShopClass(shopConut:shopConut,recommendShopList:recommendShopList),
+                    Positioned(bottom: 0,child:  AllPriceClass(shopList:shopList,btnClickStatus:btnClickStatus,checkAll:checkAll,allCheckStatus:allCheckStatus,updateShop:getUserCartList),)
+                  ],
+                ),
+              ):const Text('')
              ],
            ),
          )
@@ -81,12 +158,21 @@ class _ShopListClassState extends State<ShopListClass>{
 
 
 class CartListClass extends StatelessWidget{
-  List shopList;
-  CartListClass({super.key,required this.shopList});
+  int shopConut;
+  var shopList;
+  var changeItemFnc;
+  var updateShop;
+  CartListClass({super.key,required this.shopConut,required this.shopList,required this.changeItemFnc,required this.updateShop});
+
+  @override
+  changeItem(status,index){
+    changeItemFnc(status,index);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: shopList.isNotEmpty?Text('11'):
+      child: shopConut>0?SelectShopClass(shopList:shopList,changeItemFnc:changeItem,updateShop:updateShop):
       Image.network('https://sit.zyjsl.com/statics/images/no-thing.png',width: 500.w,height:400.h, fit: BoxFit.fill,),
     );
   }
@@ -96,15 +182,15 @@ class CartListClass extends StatelessWidget{
 
 class RecommendShopClass extends StatelessWidget{
   var recommendShopList;
-  List shopList;
-  RecommendShopClass({super.key,required this.shopList,required this.recommendShopList});
+  int shopConut;
+  RecommendShopClass({super.key,required this.shopConut,required this.recommendShopList});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
         // height: 1000.h,
         // color: Colors.red,
-        child: shopList.isEmpty?
+        child: shopConut==0?
        Column(
          children: [
            Row(
