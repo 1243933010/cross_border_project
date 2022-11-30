@@ -109,7 +109,10 @@ flutter:
       fonts:
         - asset: fonts/refund.ttf
           weight: 500
-
+    - family: changeRadio
+      fonts:
+        - asset: fonts/selechRadio.ttf
+          weight: 500
 
   # To add assets to your application, add an assets section, like this:
   # assets:

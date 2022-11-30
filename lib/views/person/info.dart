@@ -96,7 +96,7 @@ class UserInfoClass extends StatelessWidget{
                   children: [
                      ClipRRect(
                       borderRadius: BorderRadius.circular(50),
-                      child: loginStatus?  FadeInImage(
+                      child: userInfo['avatar']==String?  FadeInImage(
                           width: 110.w,
                           height: 110.h,
                           placeholder: const AssetImage('imgs/back_png.png'),

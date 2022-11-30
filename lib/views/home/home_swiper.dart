@@ -47,10 +47,15 @@ class _HomeSwiperState extends State<HomeSwiper> {
                       autoplay:true,
                       scale: 0.9,
                       itemBuilder: (BuildContext context, int index) {
-                        return Obx(()=>Image.network(
-                          c.swipterList[index]["url"],
-                          fit: BoxFit.fill,
-                        ));
+                        return Obx(()=>GestureDetector(
+                          onTap: (){
+                            print(index);
+                          },
+                          child: Image.network(
+                            c.swipterList[index]["url"],
+                            fit: BoxFit.fill,
+                          ),)
+                        );
                       },
                       itemCount:  c.swipterList.length,
                       pagination: const SwiperPagination(),
