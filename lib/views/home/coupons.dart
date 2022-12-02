@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cross_border_project/common/network/index.dart';
 import 'dart:convert';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 GlobalKey<_CouponsClassState> couponsKey = GlobalKey();
 
@@ -185,13 +186,14 @@ class CouponsContextBkClass extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Container(
+                              width: 140.w,
                               color: Colors.red[500],
-                              child: Padding(
-                                padding: const EdgeInsets.all(1),
+                              child: Center(
                                 child: Text('满${info['use_min_price']}可用',
                                     style: const TextStyle(
-                                        fontSize: 15, color: Colors.white)),
-                              )),
+                                        fontSize: 15, color: Colors.white),overflow: TextOverflow.ellipsis,),
+                              )
+                          ),
                         )
                       ],
                     ),

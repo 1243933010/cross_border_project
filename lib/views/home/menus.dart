@@ -9,6 +9,7 @@ class MenusClass extends StatelessWidget {
   MenusClass({super.key, required this.imgList});
   @override
   changeIcon(int index){
+    print(imgList[index]['info'][1]['value']);
      menusMap['${imgList[index]['info'][1]['value']}']();
   }
   @override

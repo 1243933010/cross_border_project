@@ -20,12 +20,9 @@ class _CategoryPageClassState extends State<CategoryPageClass>{
   @override
   void initState() {
 
-
       if(mounted){
-
         super.initState();
         request('category', 'get', null).then((value){
-          print('111222${value}');
             var data = jsonDecode(value.toString());
           if(data['status']==200){
             setState(() {

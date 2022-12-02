@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import './http_config.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -15,17 +17,20 @@ Future request(url,method,formData)async{
     options.headers['Authori-zation']=mainState.token;
     var response;
     Dio dio = new Dio(options);
-
-    if(method=='post'){
-
-      response = await dio.post(servicePath[url]!,data:formData!=null?formData:{});
+    var requestUrl = '';
+    if(url.contains(baseUrl)){
+      requestUrl = url;
+      print(url);
     }else{
-      print('222111${dio.get}${servicePath[url]}');
-      response = await dio.get(servicePath[url]!,queryParameters:formData!=null?formData:{});
+      requestUrl = servicePath[url]!;
     }
-    print(servicePath[url]);
+    print('%%%%${servicePath[url]}');
+    if(method=='post'){
+      response = await dio.post(requestUrl,data:formData!=null?formData:{});
+    }else{
+      response = await dio.get(requestUrl,queryParameters:formData!=null?formData:{});
+    }
 
-    // print(dio.options.headers);
     if(response.statusCode == 200){
       return response;
     }else{
