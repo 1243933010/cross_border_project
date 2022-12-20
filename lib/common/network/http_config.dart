@@ -16,10 +16,24 @@ const servicePath = {
   'articleBannerList':'$baseUrl/article/banner/list',//资讯轮播列表
   'articleHotList':'$baseUrl/article/hot/list',//热门列表
   'articleCategoryList':'$baseUrl/article/category/list',//文章列表
+  'orderData':'$baseUrl/order/data',//订单总信息
+
 
 
 };
 
 groomList(String id){  //精品页数据
   return '${baseUrl}/groom/list/${id.toString()}';
+}
+articleList(num id, num page,num limit){
+  return '$baseUrl/article/list/${id.toString()}?page=${page.toString()}&limit=${limit.toString()}'; //tab切换列表
+}
+articleDetail(String id){
+  return '$baseUrl/article/details/$id'; //文章详情接口
+}
+orderList(String type, num page,num limit){
+  return '$baseUrl/order/list?type=${type.toString()}&page=${page.toString()}&limit=${limit.toString()}'; //订单列表
+}
+collectUser(num page,num limit){
+  return '$baseUrl/collect/user?page=${page.toString()}&limit=${limit.toString()}'; //我的收藏列表
 }

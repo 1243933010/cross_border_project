@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:dio/dio.dart';
 import './http_config.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,7 +23,7 @@ Future request(url,method,formData)async{
     }else{
       requestUrl = servicePath[url]!;
     }
-    print('%%%%${servicePath[url]}');
+    print('${servicePath[url]}');
     if(method=='post'){
       response = await dio.post(requestUrl,data:formData!=null?formData:{});
     }else{

@@ -31,10 +31,17 @@ samples, guidance on mobile development, and a full API reference.
 > **states存放getx动态相应数据**
 
 > **views存放所有页面**
-- home文件夹首页
+- article 行业咨询列表以及详情页
+- boutique 精品推荐页
 - category文件夹分类页
+- collection 我的收藏页面
+- home文件夹首页
 - login 登陆页
 - person 个人中心页
 - shopping-cart 购物车页
-- boutique 精品推荐页
+
 > **widgets存放公平组件或者公共封装函数**
+- bottomNv 对首页tab进行的封装,实现body动态切换
+- HotRadio 封装一个单选框
+- inputNumber 封装一个数字加减框
+- Toast 封装一个弹出提示框

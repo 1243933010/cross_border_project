@@ -35,8 +35,8 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primaryColor: Colors.white,
               primarySwatch: Colors.blue,
-              highlightColor: Color.fromRGBO(0, 0, 0, 0),
-              splashColor: Color.fromRGBO(0, 0, 0, 0),
+              highlightColor: const Color.fromRGBO(0, 0, 0, 0),
+              splashColor:const Color.fromRGBO(0, 0, 0, 0),
               // initialRoute: RouteManager.splashPage,
               // getPages: AppPages.getPages(),
             ),
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
 
 void testChangeToken()async{
   final globalStateController = Get.put(GlobalStateController());
-  var token = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwd2QiOiJkNDFkOGNkOThmMDBiMjA0ZTk4MDA5OThlY2Y4NDI3ZSIsImlzcyI6InNpdC56eWpzbC5jb20iLCJhdWQiOiJzaXQuenlqc2wuY29tIiwiaWF0IjoxNjY5NDQ1MjkwLCJuYmYiOjE2Njk0NDUyOTAsImV4cCI6MTY3MjAzNzI5MCwianRpIjp7ImlkIjo3LCJ0eXBlIjoicm91dGluZSJ9fQ.RAFF-q261C4-9OR6Sx7ipdgcLG2-CW4v0CVGHi6cg3Q';
+  var token = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwd2QiOiJkNDFkOGNkOThmMDBiMjA0ZTk4MDA5OThlY2Y4NDI3ZSIsImlzcyI6InNpdC56eWpzbC5jb20iLCJhdWQiOiJzaXQuenlqc2wuY29tIiwiaWF0IjoxNjcwOTAxMjA5LCJuYmYiOjE2NzA5MDEyMDksImV4cCI6MTY3MzQ5MzIwOSwianRpIjp7ImlkIjo3LCJ0eXBlIjoicm91dGluZSJ9fQ.mR3VEuqIzzvQ9pbYxFHKUkwGScJGRUvLFioGSF28VEw';
   globalStateController.changeToken(token);
   final prefs = await SharedPreferences.getInstance();
   await prefs.setString('token', token);

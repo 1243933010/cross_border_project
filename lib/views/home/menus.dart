@@ -3,13 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:cross_border_project/controller/main.dart';
 import './menu_fnc.dart';
-
+import 'package:cross_border_project/widgets/Toast.dart';
 class MenusClass extends StatelessWidget {
   final imgList;
   MenusClass({super.key, required this.imgList});
   @override
   changeIcon(int index){
     print(imgList[index]['info'][1]['value']);
+    if( menusMap['${imgList[index]['info'][1]['value']}']==null){
+      errorInfo('暂未开放');
+      return false;
+    }
      menusMap['${imgList[index]['info'][1]['value']}']();
   }
   @override

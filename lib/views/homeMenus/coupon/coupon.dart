@@ -84,8 +84,8 @@ class _CouponPageClassState extends State<CouponPageClass> {
                                 decoration: BoxDecoration(
                                     border: Border(
                                         bottom: BorderSide(
-                                            width: index == i ? 2 : 0,
-                                            color: Colors.red))),
+                                            width: 2,
+                                            color: index == i ? Colors.red:Colors.white))),
                                 child: Padding(
                                   padding: const EdgeInsets.only(bottom: 10),
                                   child: Text('${tabArr[i]['title']}'),
@@ -175,7 +175,7 @@ class _CouponPageClassState extends State<CouponPageClass> {
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                       width: 1,
-                                                      color: Colors.red),
+                                                      color: Colors.grey),
                                                   borderRadius: BorderRadius.circular(10)
                                                 ),
                                                 child: Center(
