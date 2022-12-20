@@ -4,11 +4,22 @@ import 'package:cross_border_project/controller/main.dart';
 
 
 Map menusMap = {
-  '/pages/goods_cate/goods_cate':goCate
+  '/pages/goods_cate/goods_cate':goCate,
+  '/pages/users/user_get_coupon/index':couponPage,
+  '/pages/extension/news_list/index':articlePage,
+  '/pages/users/user_goods_collection/index':collectionPage,
+
 };
  goCate(){
   final globalStateController = Get.put(GlobalStateController());
-  // var mainState = Get.find<GlobalStateController>().state;
-  print('111');
   globalStateController.changeBottomBarIndex(1);
+}
+couponPage(){
+   Get.toNamed('/coupon');
+}
+articlePage(){
+  Get.toNamed('/article');
+}
+collectionPage(){
+  Get.toNamed('/collection');
 }

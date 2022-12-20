@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import './search.dart';
 import './controller.dart';
 import 'package:get/get.dart';
+
 class HomeSwiper extends StatefulWidget {
   const HomeSwiper({super.key});
   _HomeSwiperState createState() => _HomeSwiperState();
@@ -50,6 +50,7 @@ class _HomeSwiperState extends State<HomeSwiper> {
                         return Obx(()=>GestureDetector(
                           onTap: (){
                             print(index);
+                            Get.toNamed('/boutique',arguments: {'id':'1'});
                           },
                           child: Image.network(
                             c.swipterList[index]["url"],

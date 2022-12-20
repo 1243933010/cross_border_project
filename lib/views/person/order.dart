@@ -4,6 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderClass extends StatelessWidget {
   @override
+  chooseItem(String type,int index){
+    if(type=='order'){
+      Get.toNamed('/orderList',arguments: {'type':index.toString()});
+    }
+  }
+  @override
   Widget build(BuildContext context) {
     return Positioned(
         bottom: 25,
@@ -34,35 +40,50 @@ class OrderClass extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children:  [
-                          Column(
-                            children: const[
-                              Icon(IconData(0xf01c4,fontFamily: 'wallet',matchTextDirection: true,),color: Colors.red,size: 25,),
-                              Text('待付款')
-                            ],
+                          GestureDetector(
+                            onTap:(){chooseItem('order',0);},
+                            child: Column(
+                              children: const[
+                                Icon(IconData(0xf01c4,fontFamily: 'wallet',matchTextDirection: true,),color: Colors.red,size: 25,),
+                                Text('待付款')
+                              ],
+                            ),
                           ),
-                          Column(
-                            children: const[
-                              Icon(IconData(0xe619,fontFamily: 'receipt',matchTextDirection: true),color: Colors.red,size: 25,),
-                              Text('待付款')
-                            ],
+                          GestureDetector(
+                            onTap: (){chooseItem('order',1);},
+                            child: Column(
+                              children: const[
+                                Icon(IconData(0xe619,fontFamily: 'receipt',matchTextDirection: true),color: Colors.red,size: 25,),
+                                Text('待发货')
+                              ],
+                            ),
                           ),
-                          Column(
-                            children:const [
-                              Icon(IconData(0xe64f,fontFamily: 'express',matchTextDirection: true),color: Colors.red,size: 25,),
-                              Text('待付款')
-                            ],
+                          GestureDetector(
+                            onTap: (){chooseItem('order',2);},
+                            child: Column(
+                              children:const [
+                                Icon(IconData(0xe64f,fontFamily: 'express',matchTextDirection: true),color: Colors.red,size: 25,),
+                                Text('待收货')
+                              ],
+                            ),
                           ),
-                          Column(
-                            children:const [
-                              Icon(IconData(0xf01c7,fontFamily: 'evaluate',matchTextDirection: true),color: Colors.red,size: 25,),
-                              Text('待付款')
-                            ],
+                          GestureDetector(
+                            onTap: (){chooseItem('order',3);},
+                            child: Column(
+                              children:const [
+                                Icon(IconData(0xf01c7,fontFamily: 'evaluate',matchTextDirection: true),color: Colors.red,size: 25,),
+                                Text('待评价')
+                              ],
+                            ),
                           ),
-                          Column(
-                            children: const[
-                              Icon(IconData(0xe684,fontFamily: 'refund',matchTextDirection: true),color: Colors.red,size: 25,),
-                              Text('待付款')
-                            ],
+                          GestureDetector(
+                            onTap: (){chooseItem('return',0);},
+                            child: Column(
+                              children: const[
+                                Icon(IconData(0xe684,fontFamily: 'refund',matchTextDirection: true),color: Colors.red,size: 25,),
+                                Text('退款')
+                              ],
+                            ),
                           ),
                         ],
                       ),
