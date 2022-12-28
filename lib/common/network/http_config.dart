@@ -17,7 +17,7 @@ const servicePath = {
   'articleHotList':'$baseUrl/article/hot/list',//热门列表
   'articleCategoryList':'$baseUrl/article/category/list',//文章列表
   'orderData':'$baseUrl/order/data',//订单总信息
-
+  'collectDel':'$baseUrl/collect/del',//删除收藏商品
 
 
 };
