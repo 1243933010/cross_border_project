@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import './shop-list.dart';
-// import 'package:cross_border_project/common/network/index.dart';
 
 class ShoppingCartPageClass extends StatefulWidget {
   ShoppingCartPageClass({super.key});
