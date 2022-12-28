@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:get/get.dart';
 import 'package:cross_border_project/states/mian.dart';
 class GlobalStateController extends GetxController{

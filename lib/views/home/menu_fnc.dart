@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cross_border_project/controller/main.dart';
 
@@ -8,6 +7,7 @@ Map menusMap = {
   '/pages/users/user_get_coupon/index':couponPage,
   '/pages/extension/news_list/index':articlePage,
   '/pages/users/user_goods_collection/index':collectionPage,
+  '/pages/users/user_address_list/index':addressClient
 
 };
  goCate(){
@@ -22,4 +22,7 @@ articlePage(){
 }
 collectionPage(){
   Get.toNamed('/collection');
+}
+addressClient(){
+  Get.toNamed('/addressClient');
 }

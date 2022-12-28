@@ -7,6 +7,7 @@ import 'package:cross_border_project/views/article/article.dart';
 import 'package:cross_border_project/views/person/orderList/orderList.dart';
 import 'package:cross_border_project/views/article/article_detail/articleDetail.dart';
 import 'package:cross_border_project/views/collection/collection.dart';
+import 'package:cross_border_project/views/addressClient/addressClient.dart';
 
 class RouterHelper {
   static const String categoryPage = '/category-page';
@@ -17,6 +18,7 @@ class RouterHelper {
   static const String orderList = '/orderList';
   static const String articleDetail = '/articleDetail';
   static const String collection = '/collection';
+  static const String addressClient = '/addressClient';
 
   static List<GetPage> routes = [
     GetPage(name: categoryPage, page: () =>  CategoryPageClass()),
@@ -27,6 +29,7 @@ class RouterHelper {
     GetPage(name: orderList, page: ()=>OrderListClass()),
     GetPage(name: articleDetail, page: ()=>ArticleDetailClass()),
     GetPage(name: collection, page: ()=>CollectionClass()),
+    GetPage(name: addressClient, page: ()=>AddressClientClass()),
 
   ];
 }

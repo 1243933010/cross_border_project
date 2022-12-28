@@ -31,6 +31,7 @@ samples, guidance on mobile development, and a full API reference.
 > **states存放getx动态相应数据**
 
 > **views存放所有页面**
+- addressClient 地址管理
 - article 行业咨询列表以及详情页
 - boutique 精品推荐页
 - category文件夹分类页
